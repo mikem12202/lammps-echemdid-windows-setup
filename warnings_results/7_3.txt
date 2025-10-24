@@ -1,0 +1,159 @@
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ lmp_mingw64_mpi -in in.melt
+LAMMPS (7 Aug 2019)
+Lattice spacing in x,y,z = 1.6796 1.6796 1.6796
+Created orthogonal box = (0 0 0) to (16.796 16.796 16.796)
+  1 by 1 by 1 MPI processor grid
+Created 4000 atoms
+  create_atoms CPU = 0.0002894 secs
+Neighbor list info ...
+  update every 20 steps, delay 0 steps, check no
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 2.8
+  ghost atom cutoff = 2.8
+  binsize = 1.4, bins = 12 12 12
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 3.222 | 3.222 | 3.222 Mbytes
+Step Temp E_pair E_mol TotEng Press
+       0            3   -6.7733681            0   -2.2744931   -3.7033504
+      50    1.6758903   -4.7955425            0   -2.2823355     5.670064
+     100    1.6458363   -4.7492704            0   -2.2811332    5.8691042
+     150    1.6324555   -4.7286791            0    -2.280608    5.9589514
+     200    1.6630725   -4.7750988            0   -2.2811136    5.7364886
+     250    1.6275257   -4.7224992            0    -2.281821    5.9567365
+Loop time of 0.322 on 1 procs for 250 steps with 4000 atoms
+
+Performance: 335403.518 tau/day, 776.397 timesteps/s
+9.7% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.25325    | 0.25325    | 0.25325    |   0.0 | 78.65
+Neigh   | 0.045068   | 0.045068   | 0.045068   |   0.0 | 14.00
+Comm    | 0.0042905  | 0.0042905  | 0.0042905  |   0.0 |  1.33
+Output  | 0.014077   | 0.014077   | 0.014077   |   0.0 |  4.37
+Modify  | 0.0043415  | 0.0043415  | 0.0043415  |   0.0 |  1.35
+Other   |            | 0.0009711  |            |       |  0.30
+
+Nlocal:    4000 ave 4000 max 4000 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    5499 ave 5499 max 5499 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    151513 ave 151513 max 151513 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 151513
+Ave neighs/atom = 37.8783
+Neighbor list builds = 12
+Dangerous builds not checked
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ ^C
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ mpiexec -n 2 lmp_mingw64_mpi -in in.melt
+
+job aborted:
+[ranks] message
+
+[0] process exited without calling finalize
+
+[1] terminated
+
+---- error analysis -----
+
+[0] on ADAMLABFIVE
+lmp_mingw64_mpi ended prematurely and may have crashed. exit code 0xc0000374
+
+---- error analysis -----
+
+** New:
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ lmp_mingw64_mpi -in in.melt
+LAMMPS (7 Aug 2019)
+Lattice spacing in x,y,z = 1.6796 1.6796 1.6796
+Created orthogonal box = (0 0 0) to (16.796 16.796 16.796)
+  1 by 1 by 1 MPI processor grid
+Created 4000 atoms
+  create_atoms CPU = 0.0003619 secs
+Neighbor list info ...
+  update every 20 steps, delay 0 steps, check no
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 2.8
+  ghost atom cutoff = 2.8
+  binsize = 1.4, bins = 12 12 12
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 3.222 | 3.222 | 3.222 Mbytes
+Step Temp E_pair E_mol TotEng Press
+       0            3   -6.7733681            0   -2.2744931   -3.7033504
+      50    1.6758903   -4.7955425            0   -2.2823355     5.670064
+     100    1.6458363   -4.7492704            0   -2.2811332    5.8691042
+     150    1.6324555   -4.7286791            0    -2.280608    5.9589514
+     200    1.6630725   -4.7750988            0   -2.2811136    5.7364886
+     250    1.6275257   -4.7224992            0    -2.281821    5.9567365
+Loop time of 0.317292 on 1 procs for 250 steps with 4000 atoms
+
+Performance: 340380.792 tau/day, 787.918 timesteps/s
+29.5% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.25337    | 0.25337    | 0.25337    |   0.0 | 79.85
+Neigh   | 0.043968   | 0.043968   | 0.043968   |   0.0 | 13.86
+Comm    | 0.0042013  | 0.0042013  | 0.0042013  |   0.0 |  1.32
+Output  | 0.010395   | 0.010395   | 0.010395   |   0.0 |  3.28
+Modify  | 0.0042767  | 0.0042767  | 0.0042767  |   0.0 |  1.35
+Other   |            | 0.001085   |            |       |  0.34
+
+Nlocal:    4000 ave 4000 max 4000 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    5499 ave 5499 max 5499 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    151513 ave 151513 max 151513 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 151513
+Ave neighs/atom = 37.8783
+Neighbor list builds = 12
+Dangerous builds not checked
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ mpiexec -n 2 lmp_mingw64_mpi -in in.melt
+
+job aborted:
+[ranks] message
+
+[0] terminated
+
+[1] process exited without calling finalize
+
+---- error analysis -----
+
+[1] on ADAMLABFIVE
+lmp_mingw64_mpi ended prematurely and may have crashed. exit code 0xc0000374
+
+---- error analysis -----
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$

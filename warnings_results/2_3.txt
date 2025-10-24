@@ -1,0 +1,14 @@
+ADAML@ADAMLabFive MINGW64 ~
+$ which mpiexec
+/c/Program Files/Microsoft MPI/Bin/mpiexec
+
+ADAML@ADAMLabFive MINGW64 ~
+$ mpiexec --version
+Unknown option: --version
+
+ADAML@ADAMLabFive MINGW64 ~
+$ mpiexec -n 2 hostname
+ADAMLabFive
+ADAMLabFive
+
+ADAML@ADAMLabFive MINGW64 ~

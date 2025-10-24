@@ -1,0 +1,85 @@
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ gdb /c/Users/ADAML/Documents/lammps-7Aug19/src/lmp_mingw64_mpi.exe
+GNU gdb (GDB) 16.3
+Copyright (C) 2024 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-w64-mingw32".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from C:/Users/ADAML/Documents/lammps-7Aug19/src/lmp_mingw64_mpi.exe...
+(gdb) set args -in in.melt
+(gdb) run
+Starting program: C:\Users\ADAML\Documents\lammps-7Aug19\src\lmp_mingw64_mpi.exe -in in.melt
+[New Thread 22424.0x5ef8]
+[New Thread 22424.0x50b8]
+[New Thread 22424.0x596c]
+warning: onecore\net\netprofiles\service\src\nsp\dll\namespaceserviceprovider.cpp(574)\nlansp_c.dll!00007FFFCBDFDB1D: (caller: 00007FF8182CACF6) LogHr(1) tid(3bdc) 8007277C No such service is known. The service cannot be found in the specified name space.
+warning: onecore\net\netprofiles\service\src\nsp\dll\namespaceserviceprovider.cpp(574)\nlansp_c.dll!00007FFFCBDFDB1D: (caller: 00007FF8182CACF6) LogHr(2) tid(3bdc) 8007277C No such service is known. The service cannot be found in the specified name space.
+warning: onecore\net\netprofiles\service\src\nsp\dll\namespaceserviceprovider.cpp(574)\nlansp_c.dll!00007FFFCBDFDB1D: (caller: 00007FF8182CACF6) LogHr(3) tid(3bdc) 8007277C No such service is known. The service cannot be found in the specified name space.
+LAMMPS (7 Aug 2019)
+warning: Critical error detected c0000374
+
+Thread 1 received signal SIGTRAP, Trace/breakpoint trap.
+0x00007ff81a3fd583 in ntdll!RtlIsZeroMemory () from C:\WINDOWS\SYSTEM32\ntdll.dll
+(gdb) bt
+#0  0x00007ff81a3fd583 in ntdll!RtlIsZeroMemory () from C:\WINDOWS\SYSTEM32\ntdll.dll
+#1  0x00007ff81a40665a in ntdll!.misaligned_access () from C:\WINDOWS\SYSTEM32\ntdll.dll
+#2  0x00007ff81a40693a in ntdll!.misaligned_access () from C:\WINDOWS\SYSTEM32\ntdll.dll
+#3  0x00007ff81a412935 in ntdll!.misaligned_access () from C:\WINDOWS\SYSTEM32\ntdll.dll
+#4  0x00007ff81a3322ed in ntdll!RtlReAllocateHeap () from C:\WINDOWS\SYSTEM32\ntdll.dll
+#5  0x00007ff81a3321da in ntdll!RtlReAllocateHeap () from C:\WINDOWS\SYSTEM32\ntdll.dll
+#6  0x00007ff81931cc47 in realloc () from C:\WINDOWS\System32\msvcrt.dll
+#7  0x00007ff78f68b06b in LAMMPS_NS::Memory::srealloc (this=0xf34c90, ptr=<optimized out>, nbytes=4,
+    name=name@entry=0x7ff78f929b00 "atom:tag") at ../memory.cpp:96
+#8  0x00007ff78f48d1f2 in LAMMPS_NS::Memory::grow<int> (this=<optimized out>, array=<optimized out>,
+    n=<optimized out>, name=0x7ff78f929b00 "atom:tag")
+    at C:/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi/../memory.h:65
+#9  LAMMPS_NS::AtomVecAtomic::grow (this=0xe3aec0, n=<optimized out>) at ../atom_vec_atomic.cpp:57
+#10 0x00007ff78f47f306 in LAMMPS_NS::Atom::create_avec (this=0xe3a160, style=0xe4a7fb "atomic",
+    narg=0, arg=0xe4aa58, trysuffix=1) at ../atom.cpp:449
+#11 0x00007ff78f64a030 in LAMMPS_NS::Input::atom_style (this=this@entry=0xe2aeb0) at ../input.cpp:1421
+#12 0x00007ff78f64cc34 in LAMMPS_NS::Input::execute_command (this=this@entry=0xe2aeb0)
+    at ../input.cpp:801
+#13 0x00007ff78f64d04e in LAMMPS_NS::Input::file (this=0xe2aeb0) at ../input.cpp:229
+#14 0x00007ff78f9248e0 in main (argc=<optimized out>, argv=<optimized out>) at ../main.cpp:65
+(gdb) info registers
+rax            0x0                 0
+rbx            0xc0000374          3221226356
+rcx            0x242695e656660000  2604934251004952576
+rdx            0x10b               267
+rsi            0x1                 1
+rdi            0x7ff81a4748b0      140703569496240
+rbp            0xe3b080            0xe3b080
+rsp            0x5ff6d0            0x5ff6d0
+r8             0xf30150            15925584
+r9             0xe48f10            14978832
+r10            0x7ff807040003      140703246319619
+r11            0xf30000            15925248
+r12            0x4                 4
+r13            0x0                 0
+r14            0x40000060          1073741920
+r15            0x0                 0
+rip            0x7ff81a3fd583      0x7ff81a3fd583 <ntdll!RtlIsZeroMemory+163>
+eflags         0x202               [ IF ]
+cs             0x33                51
+ss             0x2b                43
+ds             0x2b                43
+es             0x2b                43
+fs             0x53                83
+gs             0x2b                43
+(gdb) quit
+A debugging session is active.
+
+        Inferior 1 [process 22424] will be killed.
+
+Quit anyway? (y or n) y
+

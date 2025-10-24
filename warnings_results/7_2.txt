@@ -1,0 +1,290 @@
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ mpiexec -n 4 lmp_mingw64_mpi -h
+
+Large-scale Atomic/Molecular Massively Parallel Simulator - 7 Aug 2019
+
+Usage example: lmp_mingw64_mpi -var t 300 -echo screen -in in.alloy
+
+List of command line options supported by this LAMMPS executable:
+
+-echo none/screen/log/both  : echoing of input script (-e)
+-help                       : print this help message (-h)
+-in filename                : read input from file, not stdin (-i)
+-kokkos on/off ...          : turn KOKKOS mode on or off (-k)
+-log none/filename          : where to send log output (-l)
+-mpicolor color             : which exe in a multi-exe mpirun cmd (-m)
+-nocite                     : disable writing log.cite file (-nc)
+-package style ...          : invoke package command (-pk)
+-partition size1 size2 ...  : assign partition sizes (-p)
+-plog basename              : basename for partition logs (-pl)
+-pscreen basename           : basename for partition screens (-ps)
+-restart2data rfile dfile ... : convert restart to data file (-r2data)
+-restart2dump rfile dgroup dstyle dfile ...
+                            : convert restart to dump file (-r2dump)
+-reorder topology-specs     : processor reordering (-r)
+-screen none/filename       : where to send screen output (-sc)
+-suffix gpu/intel/opt/omp   : style suffix to apply (-sf)
+-var varname value          : set index style variable (-v)
+
+OS: Windows 10.0 (22631) on x86_64
+
+Compiler: GNU C++ 15.2.0 with OpenMP not enabled
+
+Active compile time flags:
+
+-DLAMMPS_GZIP
+-DLAMMPS_SMALLBIG
+
+sizeof(smallint):  32-bit
+sizeof(imageint):  32-bit
+sizeof(tagint):    32-bit
+sizeof(bigint):    64-bit
+
+Installed packages:
+
+KSPACE MANYBODY MISC MOLECULE QEQ USER-REAXC
+
+List of individual style options included in this LAMMPS executable
+
+* Atom styles:
+
+angle           atomic          body            bond            charge
+ellipsoid       full            hybrid          line            molecular
+sphere          template        tri
+
+* Integrate styles:
+
+respa           verlet
+
+* Minimize styles:
+
+cg              fire            hftn            quickmin        sd
+
+* Pair styles:
+
+adp             airebo          airebo/morse    atm             beck
+bop             born            born/coul/dsf   born/coul/long  born/coul/msm
+born/coul/wolf  buck            buck/coul/cut   buck/coul/long  buck/coul/msm
+buck/long/coul/long             comb            comb3           coul/cut
+coul/debye      coul/dsf        coul/long       coul/msm        coul/streitz
+coul/wolf       reax            dpd             dpd/tstat       eam
+eam/alloy       eam/cd          eam/cd/old      eam/fs          eim
+gauss           gw              gw/zbl          hbond/dreiding/lj
+hbond/dreiding/morse            hybrid          hybrid/overlay  lcbop
+lj96/cut        lj/charmm/coul/charmm           lj/charmm/coul/charmm/implicit
+lj/charmm/coul/long             lj/charmm/coul/msm
+lj/charmmfsw/coul/charmmfsh     lj/charmmfsw/coul/long          lj/cubic
+lj/cut          lj/cut/coul/cut lj/cut/coul/debye               lj/cut/coul/dsf
+lj/cut/coul/long                lj/cut/coul/msm lj/cut/coul/wolf
+lj/cut/tip4p/cut                lj/cut/tip4p/long               lj/expand
+lj/gromacs      lj/gromacs/coul/gromacs         lj/long/coul/long
+lj/long/tip4p/long              lj/smooth       lj/smooth/linear
+lj/sf           mie/cut         morse           nb3b/harmonic   nm/cut
+nm/cut/coul/cut nm/cut/coul/long                polymorphic     reax/c
+rebo            soft            sw              table           tersoff
+tersoff/mod     tersoff/mod/c   tersoff/zbl     tip4p/cut       tip4p/long
+ufm             vashishta       vashishta/table yukawa          zbl
+zero
+
+* Bond styles:
+
+fene            fene/expand     gromos          harmonic        hybrid
+morse           nonlinear       quartic         table           zero
+
+* Angle styles:
+
+charmm          cosine          cosine/delta    cosine/periodic cosine/squared
+harmonic        hybrid          table           zero
+
+* Dihedral styles:
+
+charmm          charmmfsw       harmonic        helix           hybrid
+multi/harmonic  opls            zero
+
+* Improper styles:
+
+cvff            harmonic        hybrid          umbrella        zero
+
+* KSpace styles:
+
+ewald           ewald/dipole    ewald/dipole/spin               ewald/disp
+msm             msm/cg          pppm            pppm/cg         pppm/dipole
+pppm/dipole/spin                pppm/disp       pppm/disp/tip4p pppm/stagger
+pppm/tip4p
+
+* Fix styles
+
+adapt           addforce        ave/atom        ave/chunk       ave/correlate
+ave/histo       ave/histo/weight                ave/time        aveforce
+balance         box/relax       cmap            controller      deform
+deposit         ave/spatial     ave/spatial/sphere              drag
+dt/reset        echemdid        efield          enforce2d       evaporate
+external        gld             gravity         halt            heat
+indent          langevin        lineforce       momentum        move
+nph             nph/sphere      npt             npt/sphere      nve
+nve/limit       nve/noforce     nve/sphere      nvt             nvt/sllod
+nvt/sphere      oneway          orient/bcc      orient/fcc      planeforce
+press/berendsen print           property/atom   qeq/comb        qeq/dynamic
+qeq/fire        qeq/point       qeq/reax        qeq/shielded    qeq/slater
+reax/c/bonds    reax/c/species  recenter        restrain        setforce
+spring          spring/chunk    spring/rg       spring/self     store/force
+store/state     temp/berendsen  temp/csld       temp/csvr       temp/rescale
+thermal/conductivity            tmd             ttm             tune/kspace
+vector          viscosity       viscous         wall/harmonic   wall/lj1043
+wall/lj126      wall/lj93       wall/reflect    wall/region
+
+* Compute styles:
+
+adf             aggregate/atom  angle           angle/local     angmom/chunk
+bond            bond/local      centro/atom     chunk/atom
+chunk/spread/atom               cluster/atom    cna/atom        com
+com/chunk       contact/atom    coord/atom      dihedral        dihedral/local
+dipole/chunk    displace/atom   erotate/sphere  erotate/sphere/atom
+fragment/atom   global/atom     group/group     gyration        gyration/chunk
+heat/flux       hexorder/atom   improper        improper/local  inertia/chunk
+ke              ke/atom         msd             msd/chunk       msd/nongauss
+omega/chunk     orientorder/atom                pair            pair/local
+pe              pe/atom         pressure        property/
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ lmp_mingw64_mpi -h | head -n 10
+
+Large-scale Atomic/Molecular Massively Parallel Simulator - 7 Aug 2019
+
+Usage example: C:\Users\ADAML\Documents\lammps-7Aug19\src\lmp_mingw64_mpi.exe -var t 300 -echo screen -in in.alloy
+
+List of command line options supported by this LAMMPS executable:
+
+-echo none/screen/log/both  : echoing of input script (-e)
+-help                       : print this help message (-h)
+-in filename                : read input from file, not stdin (-i)
+
+
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples
+$ cd melt
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ ls -la
+total 21
+drwxr-xr-x 1 ADAML ADAML    0 Aug  6  2019 .
+drwxr-xr-x 1 ADAML ADAML    0 Aug  6  2019 ..
+-rw-r--r-- 1 ADAML ADAML  563 Aug  6  2019 in.melt
+-rw-r--r-- 1 ADAML ADAML 2854 Aug  6  2019 log.27Nov18.melt.g++.1
+-rw-r--r-- 1 ADAML ADAML 2855 Aug  6  2019 log.27Nov18.melt.g++.4
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ lmp_mingw64_mpi -in in.melt
+LAMMPS (7 Aug 2019)
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ /c/Users/$USER/Documents/lammps-7Aug19/src/lmp_mingw64_mpi -in in.melt
+LAMMPS (7 Aug 2019)
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ lmp_mpi -in in.melt
+LAMMPS (7 Aug 2019)
+
+*** New
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ rm -f log.lammps dump.melt
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ lmp_mingw64_mpi -in in.melt -log test.log -screen none
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ ls -la
+total 25
+drwxr-xr-x 1 ADAML ADAML    0 Oct 24 15:47 .
+drwxr-xr-x 1 ADAML ADAML    0 Aug  6  2019 ..
+-rw-r--r-- 1 ADAML ADAML  563 Aug  6  2019 in.melt
+-rw-r--r-- 1 ADAML ADAML 2854 Aug  6  2019 log.27Nov18.melt.g++.1
+-rw-r--r-- 1 ADAML ADAML 2855 Aug  6  2019 log.27Nov18.melt.g++.4
+-rw-r--r-- 1 ADAML ADAML    0 Oct 24 15:47 test.log
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ cat test.log
+
+** New
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ lmp_mingw64_mpi -in in.melt 2>&1 | tee run_output.txt
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ echo "Exit code:$?"
+Exit code:0
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ /c/Users/$USER/Documents/lammps-7Aug19/src/lmp_mingw64_mpi.exe -in in.melt 2>&1 | tee run_output2.txt
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ echo "units lj" | lmp_mingw64_mpi 2>&1 | tee simple_test.txt
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$
+
+** New
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ lmp_mingw64_mpi -in in.melt -echo both -screen test_screen.txt -log test_log.txt
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ ls -lh test_screen.txt test_log.txt
+-rw-r--r-- 1 ADAML ADAML 0 Oct 24 15:55 test_log.txt
+-rw-r--r-- 1 ADAML ADAML 0 Oct 24 15:55 test_screen.txt
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ echo "===SCREEN OUTPUT==="
+===SCREEN OUTPUT===
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ cat test_screen.txt
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ echo ""
+
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ echo "===LOG OUTPUT==="
+===LOG OUTPUT===
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ cat test_log.txt
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ ls -lh dump.melt 2>/dev/null && echo "Dump file exists!" || echo "No dump file"
+No dump file
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$
+** New
+
+Microsoft Windows [Version 10.0.22631.6060]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\ADAML>cd C:\Users\ADAML\Documents\lammps-7Aug19\examples\melt
+
+C:\Users\ADAML\Documents\lammps-7Aug19\examples\melt>C:\Users\ADAML\Documents\lammps-7Aug19\src\lmp_mingw64_mpi.exe -in in.melt -log cmd_test.log
+LAMMPS (7 Aug 2019)
+
+C:\Users\ADAML\Documents\lammps-7Aug19\examples\melt>type cmd_test.log
+
+C:\Users\ADAML\Documents\lammps-7Aug19\examples\melt>dir dump.melt
+ Volume in drive C is OS
+ Volume Serial Number is EC2F-B3DC
+
+ Directory of C:\Users\ADAML\Documents\lammps-7Aug19\examples\melt
+
+File Not Found
+
+C:\Users\ADAML\Documents\lammps-7Aug19\examples\melt>
+
+
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ gdb ~/lammps-7Aug19/src/lmp_mingw64.exe
+-bash: gdb: command not found
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$

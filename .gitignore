@@ -1,0 +1,28 @@
+# Compiled executables
+*.exe
+*.o
+*.so
+*.dll
+
+# Build directories
+Obj_*/
+lib/
+
+# Large data files
+*.tar.gz
+*.zip
+
+# Temporary files
+*.log
+*.tmp
+*~
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+

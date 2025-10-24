@@ -1,0 +1,310 @@
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make mingw64_mpi -j4
+Gathering installed package information (may take a little while)
+make[1]: Entering directory '/c/Users/ADAML/Documents/lammps-7Aug19/src'
+make[1]: warning: -j4 forced in submake: resetting jobserver mode.
+Gathering git version information
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src'
+Compiling LAMMPS for machine mingw64_mpi
+make[1]: Entering directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make[1]: warning: -j4 forced in submake: resetting jobserver mode.
+cc -O -o fastdep.exe ../DEPEND/fastdep.c
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make[1]: Entering directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make[1]: warning: -j4 forced in submake: resetting jobserver mode.
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_charmm.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_cosine.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_cosine_delta.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_cosine_periodic.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_cosine_squared.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_deprecated.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_harmonic.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_hybrid.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_table.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_zero.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../atom.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../atom_map.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../atom_vec.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../atom_vec_angle.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../atom_vec_atomic.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../atom_vec_body.cpp
+In file included from ../atom_vec_body.cpp:17:
+../my_pool_chunk.h: In member function 'void LAMMPS_NS::MyPoolChunk<T>::allocate(int)':
+../my_pool_chunk.h:199:11: error: there are no arguments to 'posix_memalign' that depend on a template parameter, so a declaration of 'posix_memalign' must be available [-Wtemplate-body]
+  199 |       if (posix_memalign(&ptr, LAMMPS_MEMALIGN,
+      |           ^~~~~~~~~~~~~~
+../my_pool_chunk.h:199:11: note: (if you use '-fpermissive', G++ will accept your code, but allowing the use of an undeclared name is deprecated)
+../my_pool_chunk.h: In instantiation of 'void LAMMPS_NS::MyPoolChunk<T>::allocate(int) [with T = int]':
+../my_pool_chunk.h:141:7:   required from 'T* LAMMPS_NS::MyPoolChunk<T>::get(int, int&) [with T = int]'
+  141 |       allocate(ibin);
+      |       ^~~~~~~~
+../atom_vec_body.cpp:854:33:   required from here
+  854 |       bonus[j].ivalue = icp->get(bonus[j].ninteger,bonus[j].iindex);
+      |                         ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../my_pool_chunk.h:199:25: error: 'posix_memalign' was not declared in this scope
+  199 |       if (posix_memalign(&ptr, LAMMPS_MEMALIGN,
+      |           ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+  200 |                          chunkperpage*chunksize[ibin]*sizeof(T)))
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../my_pool_chunk.h: In instantiation of 'void LAMMPS_NS::MyPoolChunk<T>::allocate(int) [with T = double]':
+../my_pool_chunk.h:141:7:   required from 'T* LAMMPS_NS::MyPoolChunk<T>::get(int, int&) [with T = double]'
+  141 |       allocate(ibin);
+      |       ^~~~~~~~
+../atom_vec_body.cpp:855:33:   required from here
+  855 |       bonus[j].dvalue = dcp->get(bonus[j].ndouble,bonus[j].dindex);
+      |                         ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../my_pool_chunk.h:199:25: error: 'posix_memalign' was not declared in this scope
+  199 |       if (posix_memalign(&ptr, LAMMPS_MEMALIGN,
+      |           ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+  200 |                          chunkperpage*chunksize[ibin]*sizeof(T)))
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make[1]: *** [Makefile:104: atom_vec_body.o] Error 1
+make[1]: *** Waiting for unfinished jobs....
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make: *** [Makefile:217: mingw64_mpi] Error 2
+
+** Second Error **
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make mingw64_mpi -j4
+Gathering installed package information (may take a little while)
+make[1]: Entering directory '/c/Users/ADAML/Documents/lammps-7Aug19/src'
+make[1]: warning: -j4 forced in submake: resetting jobserver mode.
+Gathering git version information
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src'
+Compiling LAMMPS for machine mingw64_mpi
+make[1]: Entering directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make[1]: warning: -j4 forced in submake: resetting jobserver mode.
+cc -O -o fastdep.exe ../DEPEND/fastdep.c
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make[1]: Entering directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make[1]: warning: -j4 forced in submake: resetting jobserver mode.
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_charmm.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_cosine.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_cosine_delta.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_cosine_periodic.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_cosine_squared.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_deprecated.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_harmonic.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_hybrid.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_table.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../angle_zero.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../atom.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../atom_map.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../atom_vec.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../atom_vec_angle.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../atom_vec_atomic.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../atom_vec_body.cpp
+In file included from ../atom_vec_body.cpp:17:
+../my_pool_chunk.h: In member function 'void LAMMPS_NS::MyPoolChunk<T>::allocate(int)':
+../my_pool_chunk.h:199:7: error: 'ptr' was not declared in this scope [-Wtemplate-body]
+  199 |       ptr = _aligned_malloc(chunkperpage * chunksize[ibin] * sizeof(T), LAMMPS_MEMALIGN);
+      |       ^~~
+make[1]: *** [Makefile:104: atom_vec_body.o] Error 1
+make[1]: *** Waiting for unfinished jobs....
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make: *** [Makefile:217: mingw64_mpi] Error 2
+
+
+** Third Error **
+
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../fft3d.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_FFTW3               -c ../fft3d_wrap.cpp
+In file included from ../fft3d.cpp:22:
+../fft3d.h:96:10: fatal error: fftw3.h: No such file or directory
+   96 | #include "fftw3.h"
+      |          ^~~~~~~~~
+compilation terminated.
+make[1]: *** [Makefile:104: fft3d.o] Error 1
+make[1]: *** Waiting for unfinished jobs....
+In file included from ../fft3d_wrap.h:18,
+                 from ../fft3d_wrap.cpp:14:
+../fft3d.h:96:10: fatal error: fftw3.h: No such file or directory
+   96 | #include "fftw3.h"
+      |          ^~~~~~~~~
+compilation terminated.
+make[1]: *** [Makefile:104: fft3d_wrap.o] Error 1
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make: *** [Makefile:217: mingw64_mpi] Error 2
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+
+**NOTE I went with option 2 to resolve:
+# FROM:
+FFT_INC =       -DFFT_FFTW3    	
+FFT_PATH = 
+FFT_LIB =	-lfftw3
+
+# TO:
+FFT_INC =       -DFFT_KISS
+FFT_PATH = 
+FFT_LIB =
+
+** NEW Error
+
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../displace_atoms.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../domain.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../dump.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../dump_atom.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../dump_cfg.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../dump_custom.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../dump_dcd.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../dump_deprecated.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../dump_image.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../dump_local.cpp
+../dump_custom.cpp: In constructor 'LAMMPS_NS::DumpCustom::DumpCustom(LAMMPS_NS::LAMMPS*, int, char**)':
+../dump_custom.cpp:181:14: warning: writing 1 byte into a region of size 0 [-Wstringop-overflow=]
+  181 |   columns[0] = '\0';
+      |   ~~~~~~~~~~~^~~~~~
+../dump_custom.cpp:180:23: note: destination object of size 0 allocated by 'operator new []'
+  180 |   columns = new char[n];
+      |                       ^
+../dump_local.cpp: In constructor 'LAMMPS_NS::DumpLocal::DumpLocal(LAMMPS_NS::LAMMPS*, int, char**)':
+../dump_local.cpp:111:14: warning: writing 1 byte into a region of size 0 [-Wstringop-overflow=]
+  111 |   columns[0] = '\0';
+      |   ~~~~~~~~~~~^~~~~~
+../dump_local.cpp:110:23: note: destination object of size 0 allocated by 'operator new []'
+  110 |   columns = new char[n];
+      |                       ^
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../dump_movie.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../dump_xtc.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../dump_xyz.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../error.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../ewald.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../ewald_dipole.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../ewald_dipole_spin.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../ewald_disp.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fft3d.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fft3d_wrap.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../finish.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_adapt.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_addforce.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_ave_atom.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_ave_chunk.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_ave_correlate.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_ave_histo.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_ave_histo_weight.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_ave_time.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_aveforce.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_balance.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_box_relax.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_cmap.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_controller.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_deform.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_deposit.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_deprecated.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_drag.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_dt_reset.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_echemdid.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_efield.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_enforce2d.cpp
+../fix_echemdid.cpp:38:10: fatal error: fix_qeq.h: No such file or directory
+   38 | #include "fix_qeq.h"
+      |          ^~~~~~~~~~~
+compilation terminated.
+make[1]: *** [Makefile:104: fix_echemdid.o] Error 1
+make[1]: *** Waiting for unfinished jobs....
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make: *** [Makefile:217: mingw64_mpi] Error 2
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+
+
+*** New Error
+
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_move.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../fix_neigh_history.cpp
+In file included from ../fix_neigh_history.cpp:17:
+../my_page.h: In member function 'void LAMMPS_NS::MyPage<T>::allocate()':
+../my_page.h:223:11: error: there are no arguments to 'posix_memalign' that depend on a template parameter, so a declaration of 'posix_memalign' must be available [-Wtemplate-body]
+  223 |       if (posix_memalign(&ptr, LAMMPS_MEMALIGN, pagesize*sizeof(T)))
+      |           ^~~~~~~~~~~~~~
+../my_page.h:223:11: note: (if you use '-fpermissive', G++ will accept your code, but allowing the use of an undeclared name is deprecated)
+../my_page.h: In instantiation of 'void LAMMPS_NS::MyPage<T>::allocate() [with T = int]':
+../my_page.h:93:5:   required from 'int LAMMPS_NS::MyPage<T>::init(int, int, int) [with T = int]'
+   93 |     allocate();
+      |     ^~~~~~~~
+../fix_neigh_history.cpp:179:25:   required from here
+  179 |       ipage_atom[i].init(oneatom,pgsize);
+      |       ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+../my_page.h:223:25: error: 'posix_memalign' was not declared in this scope
+  223 |       if (posix_memalign(&ptr, LAMMPS_MEMALIGN, pagesize*sizeof(T)))
+      |           ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../my_page.h: In instantiation of 'void LAMMPS_NS::MyPage<T>::allocate() [with T = double]':
+../my_page.h:93:5:   required from 'int LAMMPS_NS::MyPage<T>::init(int, int, int) [with T = double]'
+   93 |     allocate();
+      |     ^~~~~~~~
+../fix_neigh_history.cpp:180:25:   required from here
+  180 |       dpage_atom[i].init(dnum*oneatom,dnum*pgsize);
+      |       ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+../my_page.h:223:25: error: 'posix_memalign' was not declared in this scope
+  223 |       if (posix_memalign(&ptr, LAMMPS_MEMALIGN, pagesize*sizeof(T)))
+      |           ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make[1]: *** [Makefile:104: fix_neigh_history.o] Error 1
+make[1]: *** Waiting for unfinished jobs....
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make: *** [Makefile:217: mingw64_mpi] Error 2
+
+
+** New Error
+
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../lattice.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../library.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../lmppython.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../main.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../math_extra.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../math_special.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../memory.cpp
+../memory.cpp: In member function 'void* LAMMPS_NS::Memory::smalloc(LAMMPS_NS::bigint, const char*)':
+../memory.cpp:51:16: error: 'posix_memalign' was not declared in this scope
+   51 |   int retval = posix_memalign(&ptr, LAMMPS_MEMALIGN, nbytes);
+      |                ^~~~~~~~~~~~~~
+make[1]: *** [Makefile:104: memory.o] Error 1
+make[1]: *** Waiting for unfinished jobs....
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make: *** [Makefile:217: mingw64_mpi] Error 2
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+** New Error
+
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../write_data.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../write_dump.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../write_restart.cpp
+mpicxx -g -O2 -march=native -mtune=native   -DLAMMPS_GZIP -DLAMMPS_MEMALIGN=64   -DFFT_KISS        -c ../xdr_compat.cpp
+mpic++ -g -O2 -march=native -mtune=native      angle.o angle_charmm.o angle_cosine.o angle_cosine_delta.o angle_cosine_periodic.o angle_cosine_squared.o angle_deprecated.o angle_harmonic.o angle_hybrid.o angle_table.o angle_zero.o atom.o atom_map.o atom_vec.o atom_vec_angle.o atom_vec_atomic.o atom_vec_body.o atom_vec_bond.o atom_vec_charge.o atom_vec_ellipsoid.o atom_vec_full.o atom_vec_hybrid.o atom_vec_line.o atom_vec_molecular.o atom_vec_sphere.o atom_vec_template.o atom_vec_tri.o balance.o body.o bond.o bond_deprecated.o bond_fene.o bond_fene_expand.o bond_gromos.o bond_harmonic.o bond_hybrid.o bond_morse.o bond_nonlinear.o bond_quartic.o bond_table.o bond_zero.o change_box.o citeme.o comm.o comm_brick.o comm_tiled.o compute.o compute_adf.o compute_aggregate_atom.o compute_angle.o compute_angle_local.o compute_angmom_chunk.o compute_bond.o compute_bond_local.o compute_centro_atom.o compute_chunk_atom.o compute_chunk_spread_atom.o compute_cluster_atom.o compute_cna_atom.o compute_com.o compute_com_chunk.o compute_contact_atom.o compute_coord_atom.o compute_deprecated.o compute_dihedral.o compute_dihedral_local.o compute_dipole_chunk.o compute_displace_atom.o compute_erotate_sphere.o compute_erotate_sphere_atom.o compute_fragment_atom.o compute_global_atom.o compute_group_group.o compute_gyration.o compute_gyration_chunk.o compute_heat_flux.o compute_hexorder_atom.o compute_improper.o compute_improper_local.o compute_inertia_chunk.o compute_ke.o compute_ke_atom.o compute_msd.o compute_msd_chunk.o compute_msd_nongauss.o compute_omega_chunk.o compute_orientorder_atom.o compute_pair.o compute_pair_local.o compute_pe.o compute_pe_atom.o compute_pressure.o compute_property_atom.o compute_property_chunk.o compute_property_local.o compute_rdf.o compute_reduce.o compute_reduce_chunk.o compute_reduce_region.o compute_slice.o compute_spec_atom.o compute_stress_atom.o compute_temp.o compute_temp_chunk.o compute_temp_com.o compute_temp_deform.o compute_temp_partial.o compute_temp_profile.o compute_temp_ramp.o compute_temp_region.o compute_temp_sphere.o compute_ti.o compute_torque_chunk.o compute_vacf.o compute_vcm_chunk.o create_atoms.o create_bonds.o create_box.o delete_atoms.o delete_bonds.o deprecated.o dihedral.o dihedral_charmm.o dihedral_charmmfsw.o dihedral_deprecated.o dihedral_harmonic.o dihedral_helix.o dihedral_hybrid.o dihedral_multi_harmonic.o dihedral_opls.o dihedral_zero.o displace_atoms.o domain.o dump.o dump_atom.o dump_cfg.o dump_custom.o dump_dcd.o dump_deprecated.o dump_image.o dump_local.o dump_movie.o dump_xtc.o dump_xyz.o error.o ewald.o ewald_dipole.o ewald_dipole_spin.o ewald_disp.o fft3d.o fft3d_wrap.o finish.o fix.o fix_adapt.o fix_addforce.o fix_ave_atom.o fix_ave_chunk.o fix_ave_correlate.o fix_ave_histo.o fix_ave_histo_weight.o fix_ave_time.o fix_aveforce.o fix_balance.o fix_box_relax.o fix_cmap.o fix_controller.o fix_deform.o fix_deposit.o fix_deprecated.o fix_drag.o fix_dt_reset.o fix_echemdid.o fix_efield.o fix_enforce2d.o fix_evaporate.o fix_external.o fix_gld.o fix_gravity.o fix_group.o fix_halt.o fix_heat.o fix_indent.o fix_langevin.o fix_lineforce.o fix_minimize.o fix_momentum.o fix_move.o fix_neigh_history.o fix_nh.o fix_nh_sphere.o fix_nph.o fix_nph_sphere.o fix_npt.o fix_npt_sphere.o fix_nve.o fix_nve_limit.o fix_nve_noforce.o fix_nve_sphere.o fix_nvt.o fix_nvt_sllod.o fix_nvt_sphere.o fix_oneway.o fix_orient_bcc.o fix_orient_fcc.o fix_planeforce.o fix_press_berendsen.o fix_print.o fix_property_atom.o fix_qeq.o fix_qeq_comb.o fix_qeq_dynamic.o fix_qeq_fire.o fix_qeq_point.o fix_qeq_reax.o fix_qeq_shielded.o fix_qeq_slater.o fix_read_restart.o fix_reaxc.o fix_reaxc_bonds.o fix_reaxc_species.o fix_recenter.o fix_respa.o fix_restrain.o fix_setforce.o fix_spring.o fix_spring_chunk.o fix_spring_rg.o fix_spring_self.o fix_store.o fix_store_force.o fix_store_state.o fix_temp_berendsen.o fix_temp_csld.o fix_temp_csvr.o fix_temp_rescale.o fix_thermal_conductivity.o fix_tmd.o fix_ttm.o fix_tune_kspace.o fix_vector.o fix_viscosity.o fix_viscous.o fix_wall.o fix_wall_harmonic.o fix_wall_lj1043.o fix_wall_lj126.o fix_wall_lj93.o fix_wall_reflect.o fix_wall_region.o force.o gridcomm.o group.o hashlittle.o image.o imbalance.o imbalance_group.o imbalance_neigh.o imbalance_store.o imbalance_time.o imbalance_var.o improper.o improper_cvff.o improper_deprecated.o improper_harmonic.o improper_hybrid.o improper_umbrella.o improper_zero.o info.o input.o integrate.o irregular.o kspace.o kspace_deprecated.o lammps.o lattice.o library.o lmppython.o main.o math_extra.o math_special.o memory.o min.o min_cg.o min_fire.o min_hftn.o min_linesearch.o min_quickmin.o min_sd.o minimize.o modify.o molecule.o msm.o msm_cg.o nbin.o nbin_standard.o neigh_list.o neigh_request.o neighbor.o npair.o npair_copy.o npair_full_bin.o npair_full_bin_atomonly.o npair_full_bin_ghost.o npair_full_multi.o npair_full_nsq.o npair_full_nsq_ghost.o npair_half_bin_atomonly_newton.o npair_half_bin_newtoff.o npair_half_bin_newtoff_ghost.o npair_half_bin_newton.o npair_half_bin_newton_tri.o npair_half_multi_newtoff.o npair_half_multi_newton.o npair_half_multi_newton_tri.o npair_half_nsq_newtoff.o npair_half_nsq_newtoff_ghost.o npair_half_nsq_newton.o npair_half_respa_bin_newtoff.o npair_half_respa_bin_newton.o npair_half_respa_bin_newton_tri.o npair_half_respa_nsq_newtoff.o npair_half_respa_nsq_newton.o npair_half_size_bin_newtoff.o npair_half_size_bin_newton.o npair_half_size_bin_newton_tri.o npair_half_size_nsq_newtoff.o npair_half_size_nsq_newton.o npair_halffull_newtoff.o npair_halffull_newton.o npair_skip.o npair_skip_respa.o npair_skip_size.o npair_skip_size_off2on.o npair_skip_size_off2on_oneside.o nstencil.o nstencil_full_bin_2d.o nstencil_full_bin_3d.o nstencil_full_ghost_bin_2d.o nstencil_full_ghost_bin_3d.o nstencil_full_multi_2d.o nstencil_full_multi_3d.o nstencil_half_bin_2d_newtoff.o nstencil_half_bin_2d_newton.o nstencil_half_bin_2d_newton_tri.o nstencil_half_bin_3d_newtoff.o nstencil_half_bin_3d_newton.o nstencil_half_bin_3d_newton_tri.o nstencil_half_ghost_bin_2d_newtoff.o nstencil_half_ghost_bin_3d_newtoff.o nstencil_half_multi_2d_newtoff.o nstencil_half_multi_2d_newton.o nstencil_half_multi_2d_newton_tri.o nstencil_half_multi_3d_newtoff.o nstencil_half_multi_3d_newton.o nstencil_half_multi_3d_newton_tri.o ntopo.o ntopo_angle_all.o ntopo_angle_partial.o ntopo_angle_template.o ntopo_bond_all.o ntopo_bond_partial.o ntopo_bond_template.o ntopo_dihedral_all.o ntopo_dihedral_partial.o ntopo_dihedral_template.o ntopo_improper_all.o ntopo_improper_partial.o ntopo_improper_template.o output.o pair.o pair_adp.o pair_airebo.o pair_airebo_morse.o pair_atm.o pair_beck.o pair_bop.o pair_born.o pair_born_coul_dsf.o pair_born_coul_long.o pair_born_coul_msm.o pair_born_coul_wolf.o pair_buck.o pair_buck_coul_cut.o pair_buck_coul_long.o pair_buck_coul_msm.o pair_buck_long_coul_long.o pair_comb.o pair_comb3.o pair_coul_cut.o pair_coul_debye.o pair_coul_dsf.o pair_coul_long.o pair_coul_msm.o pair_coul_streitz.o pair_coul_wolf.o pair_deprecated.o pair_dpd.o pair_dpd_tstat.o pair_eam.o pair_eam_alloy.o pair_eam_cd.o pair_eam_fs.o pair_eim.o pair_gauss.o pair_gw.o pair_gw_zbl.o pair_hbond_dreiding_lj.o pair_hbond_dreiding_morse.o pair_hybrid.o pair_hybrid_overlay.o pair_lcbop.o pair_lj96_cut.o pair_lj_charmm_coul_charmm.o pair_lj_charmm_coul_charmm_implicit.o pair_lj_charmm_coul_long.o pair_lj_charmm_coul_msm.o pair_lj_charmmfsw_coul_charmmfsh.o pair_lj_charmmfsw_coul_long.o pair_lj_cubic.o pair_lj_cut.o pai
+.....
+C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe: info.o: in function `LAMMPS_NS::Info::command(int, char**)':
+C:/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi/../info.cpp:335:(.text+0x46c3): undefined reference to `GetProcessMemoryInfo'
+collect2.exe: error: ld returned 1 exit status
+make[1]: *** [Makefile:89: ../lmp_mingw64_mpi] Error 1
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make: *** [Makefile:217: mingw64_mpi] Error 2
+
+** New Error
+
+ector.o region.o region_block.o region_cone.o region_cylinder.o region_deprecated.o region_intersect.o region_plane.o region_prism.o region_sphere.o region_union.o remap.o remap_wrap.o replicate.o rerun.o reset_ids.o respa.o run.o set.o special.o thermo.o timer.o universe.o update.o utils.o variable.o velocity.o verlet.o write_coeff.o write_data.o write_dump.o write_restart.o xdr_compat.o   -lfftw3   -lpsapi -o ../lmp_mingw64_mpi
+C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lfftw3: No such file or directory
+collect2.exe: error: ld returned 1 exit status
+make[1]: *** [Makefile:89: ../lmp_mingw64_mpi] Error 1
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make: *** [Makefile:217: mingw64_mpi] Error 2
+
+** New Error
+
+_ids.o respa.o run.o set.o special.o thermo.o timer.o universe.o update.o utils.o variable.o velocity.o verlet.o write_coeff.o write_data.o write_dump.o write_restart.o xdr_compat.o      -lpsapi -o ../lmp_mingw64_mpi
+size ../lmp_mingw64_mpi
+C:\msys64\mingw64\bin\size.exe: '../lmp_mingw64_mpi': No such file
+make[1]: *** [Makefile:90: ../lmp_mingw64_mpi] Error 1
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make: *** [Makefile:217: mingw64_mpi] Error 2
+** New Error
+
+ector.o region.o region_block.o region_cone.o region_cylinder.o region_deprecated.o region_intersect.o region_plane.o region_prism.o region_sphere.o region_union.o remap.o remap_wrap.o replicate.o rerun.o reset_ids.o respa.o run.o set.o special.o thermo.o timer.o universe.o update.o utils.o variable.o velocity.o verlet.o write_coeff.o write_data.o write_dump.o write_restart.o xdr_compat.o      -lpsapi -o ../lmp_mingw64_mpi
+size ../lmp_mingw64_mpi
+C:\msys64\mingw64\bin\size.exe: '../lmp_mingw64_mpi': No such file
+make[1]: *** [Makefile:90: ../lmp_mingw64_mpi] Error 1
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make: *** [Makefile:217: mingw64_mpi] Error 2

@@ -1,0 +1,42 @@
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents
+$ mkdir -p lammps_build
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents
+$ cd lammps_build
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps_build
+$ gcc --version
+gcc.exe (Rev8, Built by MSYS2 project) 15.2.0
+Copyright (C) 2025 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps_build
+$ make --version
+GNU Make 4.4.1
+Built for x86_64-pc-msys
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps_build
+$ git --version
+git version 2.51.1
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps_build
+$ mpiexec --version
+Unknown option: --version
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps_build
+$ uname -a
+MINGW64_NT-10.0-22631 ADAMLabFive 3.6.5-0eeda3e1.x86_64 2025-10-10 14:51 UTC x86_64 Msys
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps_build
+$ mpiexec -n 2 hostname
+ADAMLabFive
+ADAMLabFive
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps_build
+$

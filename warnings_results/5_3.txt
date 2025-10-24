@@ -1,0 +1,200 @@
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make yes-user-echemdid
+Installing package user-echemdid
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make no-user-echemdid
+Uninstalling package user-echemdid
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make yes-user-reaxc
+Installing package user-reaxc
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make yes-user-echemdid
+Installing package user-echemdid
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make yes-moleculre
+Package moleculre does not exist
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make yes-molecule
+Installing package molecule
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make yes-kspace
+Installing package kspace
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make yes-manybody
+Installing package manybody
+  updating package QEQ
+  updating src/fix_qeq.cpp
+  updating src/fix_qeq.h
+  updating src/fix_qeq_dynamic.cpp
+  updating src/fix_qeq_dynamic.h
+  updating src/fix_qeq_fire.cpp
+  updating src/fix_qeq_fire.h
+  updating src/fix_qeq_point.cpp
+  updating src/fix_qeq_point.h
+  updating src/fix_qeq_shielded.cpp
+  updating src/fix_qeq_shielded.h
+  updating src/fix_qeq_slater.cpp
+  updating src/fix_qeq_slater.h
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make yes-misc
+Installing package misc
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make package-status | grep yes
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make package-status
+Installed  NO: package ASPHERE
+Installed  NO: package BODY
+Installed  NO: package CLASS2
+Installed  NO: package COLLOID
+Installed  NO: package COMPRESS
+Installed  NO: package CORESHELL
+Installed  NO: package DIPOLE
+Installed  NO: package GPU
+Installed  NO: package GRANULAR
+Installed  NO: package KIM
+Installed  NO: package KOKKOS
+Installed YES: package KSPACE
+Installed  NO: package LATTE
+Installed YES: package MANYBODY
+Installed  NO: package MC
+Installed  NO: package MESSAGE
+Installed YES: package MISC
+Installed YES: package MOLECULE
+Installed  NO: package MPIIO
+Installed  NO: package MSCG
+Installed  NO: package OPT
+Installed  NO: package PERI
+Installed  NO: package POEMS
+Installed  NO: package PYTHON
+Installed YES: package QEQ
+Installed  NO: package REPLICA
+Installed  NO: package RIGID
+Installed  NO: package SHOCK
+Installed  NO: package SNAP
+Installed  NO: package SPIN
+Installed  NO: package SRD
+Installed  NO: package VORONOI
+
+Installed  NO: package USER-ADIOS
+Installed  NO: package USER-ATC
+Installed  NO: package USER-AWPMD
+Installed  NO: package USER-BOCS
+Installed  NO: package USER-CGDNA
+Installed  NO: package USER-CGSDK
+Installed  NO: package USER-COLVARS
+Installed  NO: package USER-DIFFRACTION
+Installed  NO: package USER-DPD
+Installed  NO: package USER-DRUDE
+Installed  NO: package USER-EFF
+Installed  NO: package USER-FEP
+Installed  NO: package USER-H5MD
+Installed  NO: package USER-INTEL
+Installed  NO: package USER-LB
+Installed  NO: package USER-MANIFOLD
+Installed  NO: package USER-MEAMC
+Installed  NO: package USER-MESO
+Installed  NO: package USER-MGPT
+Installed  NO: package USER-MISC
+Installed  NO: package USER-MOFFF
+Installed  NO: package USER-MOLFILE
+Installed  NO: package USER-NETCDF
+Installed  NO: package USER-OMP
+Installed  NO: package USER-PHONON
+Installed  NO: package USER-PLUMED
+Installed  NO: package USER-PTM
+Installed  NO: package USER-QMMM
+Installed  NO: package USER-QTB
+Installed  NO: package USER-QUIP
+Installed YES: package USER-REAXC
+Installed  NO: package USER-SCAFACOS
+Installed  NO: package USER-SMD
+Installed  NO: package USER-SMTBQ
+Installed  NO: package USER-SDPD
+Installed  NO: package USER-SPH
+Installed  NO: package USER-TALLY
+Installed  NO: package USER-UEF
+Installed  NO: package USER-VTK
+Installed  NO: package USER-YAFF
+
+
+**** Second attempt
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make package-status | grep YES
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make yes-user-reaxc
+Installing package user-reaxc
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make yes-molecule
+Installing package molecule
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make yes-kspace
+Installing package kspace
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make yes-misc
+Installing package misc
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make package-status | grep YES
+Installed YES: package KSPACE
+Installed YES: package MISC
+Installed YES: package MOLECULE
+Installed YES: package USER-REAXC
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ cd /c/Users/$USER/Documents/lammps-7Aug19/src
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ cp USER-ECHEMDID/fix_echemdid.cpp .
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ cp USER-ECHEMDID/fix_echemdid.h .
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ ls -la fix_echemdid.*
+-rw-r--r-- 1 ADAML ADAML 8338 Oct 24 11:47 fix_echemdid.cpp
+-rw-r--r-- 1 ADAML ADAML 1600 Oct 24 11:47 fix_echemdid.h
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make yes-manybody
+Installing package manybody
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ ls -la fix_echemdid.*
+-rw-r--r-- 1 ADAML ADAML 8338 Oct 24 11:47 fix_echemdid.cpp
+-rw-r--r-- 1 ADAML ADAML 1600 Oct 24 11:47 fix_echemdid.h
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ ls -la fix_qeq.*
+ls: cannot access 'fix_qeq.*': No such file or directory
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ make package-status | grep YES
+Installed YES: package KSPACE
+Installed YES: package MANYBODY
+Installed YES: package MISC
+Installed YES: package MOLECULE
+Installed YES: package USER-REAXC
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$
+
+
+Also note:
+
+$ make package-status | grep QEQ
+Installed NO: package QEQ

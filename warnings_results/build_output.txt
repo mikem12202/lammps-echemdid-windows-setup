@@ -1,0 +1,10 @@
+Gathering installed package information (may take a little while)
+make[1]: Entering directory '/c/Users/ADAML/Documents/lammps-7Aug19/src'
+Gathering git version information
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src'
+Compiling LAMMPS for machine mingw64_mpi
+make[1]: Entering directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make[1]: Entering directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'
+make[1]: '../lmp_mingw64_mpi' is up to date.
+make[1]: Leaving directory '/c/Users/ADAML/Documents/lammps-7Aug19/src/Obj_mingw64_mpi'

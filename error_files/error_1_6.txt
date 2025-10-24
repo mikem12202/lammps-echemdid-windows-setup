@@ -1,0 +1,19 @@
+PS C:\Users\ADAML> dir "C:\Program Files (x86)\Microsoft SDKs\MPI\Include\mpi.h"
+dir : Cannot find path 'C:\Program Files (x86)\Microsoft SDKs\MPI\Include\mpi.h' because it does not exist.
+At line:1 char:1
++ dir "C:\Program Files (x86)\Microsoft SDKs\MPI\Include\mpi.h"
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Program File...I\Include\mpi.h:String) [Get-ChildItem], ItemNotFound
+   Exception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetChildItemCommand
+
+PS C:\Users\ADAML> dir "C:\Program Files\Microsoft SDKs\MPI\Include\mpi.h"
+dir : Cannot find path 'C:\Program Files\Microsoft SDKs\MPI\Include\mpi.h' because it does not exist.
+At line:1 char:1
++ dir "C:\Program Files\Microsoft SDKs\MPI\Include\mpi.h"
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Program File...I\Include\mpi.h:String) [Get-ChildItem], ItemNotFound
+   Exception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetChildItemCommand
+
+PS C:\Users\ADAML>

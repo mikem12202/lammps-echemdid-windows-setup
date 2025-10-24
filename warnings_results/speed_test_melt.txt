@@ -1,0 +1,487 @@
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ echo "Testing with 1 processor:"
+Testing with 1 processor:
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ time mpiexec -n 1 lmp_mpi -in in.melt
+ERROR: Error reported: failed to launch 'lmp_mpi -in in.melt' on ADAMLABFIVE
+Error (2) The system cannot find the file specified.
+
+real    0m0.191s
+user    0m0.000s
+sys     0m0.000s
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ time mpiexec -n 1 lmp_mingw64_mpi -in in.melt
+LAMMPS (7 Aug 2019)
+Lattice spacing in x,y,z = 1.6796 1.6796 1.6796
+Created orthogonal box = (0 0 0) to (16.796 16.796 16.796)
+  1 by 1 by 1 MPI processor grid
+Created 4000 atoms
+  create_atoms CPU = 0.0002477 secs
+Neighbor list info ...
+  update every 20 steps, delay 0 steps, check no
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 2.8
+  ghost atom cutoff = 2.8
+  binsize = 1.4, bins = 12 12 12
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 3.222 | 3.222 | 3.222 Mbytes
+Step Temp E_pair E_mol TotEng Press
+       0            3   -6.7733681            0   -2.2744931   -3.7033504
+      50    1.6758903   -4.7955425            0   -2.2823355     5.670064
+     100    1.6458363   -4.7492704            0   -2.2811332    5.8691042
+     150    1.6324555   -4.7286791            0    -2.280608    5.9589514
+     200    1.6630725   -4.7750988            0   -2.2811136    5.7364886
+     250    1.6275257   -4.7224992            0    -2.281821    5.9567365
+Loop time of 0.297381 on 1 procs for 250 steps with 4000 atoms
+
+Performance: 363170.600 tau/day, 840.673 timesteps/s
+84.1% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.24612    | 0.24612    | 0.24612    |   0.0 | 82.76
+Neigh   | 0.042833   | 0.042833   | 0.042833   |   0.0 | 14.40
+Comm    | 0.0037339  | 0.0037339  | 0.0037339  |   0.0 |  1.26
+Output  | 8.82e-05   | 8.82e-05   | 8.82e-05   |   0.0 |  0.03
+Modify  | 0.0036764  | 0.0036764  | 0.0036764  |   0.0 |  1.24
+Other   |            | 0.0009281  |            |       |  0.31
+
+Nlocal:    4000 ave 4000 max 4000 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    5499 ave 5499 max 5499 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    151513 ave 151513 max 151513 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 151513
+Ave neighs/atom = 37.8783
+Neighbor list builds = 12
+Dangerous builds not checked
+Total wall time: 0:00:00
+
+real    0m0.503s
+user    0m0.000s
+sys     0m0.000s
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ echo "Testing with 2 processors:"
+Testing with 2 processors:
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ time mpiexec -n 2 lmp_mingw64_mpi -in in.melt
+LAMMPS (7 Aug 2019)
+Lattice spacing in x,y,z = 1.6796 1.6796 1.6796
+Created orthogonal box = (0 0 0) to (16.796 16.796 16.796)
+  1 by 1 by 2 MPI processor grid
+Created 4000 atoms
+  create_atoms CPU = 0.0002272 secs
+Neighbor list info ...
+  update every 20 steps, delay 0 steps, check no
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 2.8
+  ghost atom cutoff = 2.8
+  binsize = 1.4, bins = 12 12 12
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 2.805 | 2.805 | 2.805 Mbytes
+Step Temp E_pair E_mol TotEng Press
+       0            3   -6.7733681            0   -2.2744931   -3.7033504
+      50    1.6758903   -4.7955425            0   -2.2823355     5.670064
+     100    1.6458363   -4.7492704            0   -2.2811332    5.8691042
+     150    1.6324555   -4.7286791            0    -2.280608    5.9589514
+     200    1.6630725   -4.7750988            0   -2.2811136    5.7364886
+     250    1.6275257   -4.7224992            0    -2.281821    5.9567365
+Loop time of 0.157126 on 2 procs for 250 steps with 4000 atoms
+
+Performance: 687346.898 tau/day, 1591.081 timesteps/s
+44.7% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.12341    | 0.12409    | 0.12478    |   0.2 | 78.98
+Neigh   | 0.021657   | 0.021764   | 0.02187    |   0.1 | 13.85
+Comm    | 0.0078493  | 0.0086387  | 0.0094281  |   0.8 |  5.50
+Output  | 6.23e-05   | 6.84e-05   | 7.45e-05   |   0.0 |  0.04
+Modify  | 0.0018924  | 0.001907   | 0.0019217  |   0.0 |  1.21
+Other   |            | 0.0006537  |            |       |  0.42
+
+Nlocal:    2000 ave 2006 max 1994 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+Nghost:    3942 ave 3967 max 3917 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+Neighs:    75756.5 ave 77054 max 74459 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 151513
+Ave neighs/atom = 37.8783
+Neighbor list builds = 12
+Dangerous builds not checked
+Total wall time: 0:00:00
+
+real    0m0.363s
+user    0m0.000s
+sys     0m0.000s
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ echo "Testing with 4 processors:"
+Testing with 4 processors:
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ time mpiexec -n 4 lmp_mingw64_mpi -in in.melt
+LAMMPS (7 Aug 2019)
+Lattice spacing in x,y,z = 1.6796 1.6796 1.6796
+Created orthogonal box = (0 0 0) to (16.796 16.796 16.796)
+  1 by 2 by 2 MPI processor grid
+Created 4000 atoms
+  create_atoms CPU = 0.0004207 secs
+Neighbor list info ...
+  update every 20 steps, delay 0 steps, check no
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 2.8
+  ghost atom cutoff = 2.8
+  binsize = 1.4, bins = 12 12 12
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 2.706 | 2.706 | 2.706 Mbytes
+Step Temp E_pair E_mol TotEng Press
+       0            3   -6.7733681            0   -2.2744931   -3.7033504
+      50    1.6754119   -4.7947589            0   -2.2822693    5.6615925
+     100    1.6503357    -4.756014            0   -2.2811293    5.8050524
+     150    1.6596605   -4.7699432            0   -2.2810749    5.7830138
+     200    1.6371874   -4.7365462            0   -2.2813789    5.9246674
+     250    1.6323462   -4.7292021            0   -2.2812949    5.9762238
+Loop time of 0.0882297 on 4 procs for 250 steps with 4000 atoms
+
+Performance: 1224077.259 tau/day, 2833.512 timesteps/s
+66.4% CPU use with 4 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.063234   | 0.064321   | 0.065299   |   0.3 | 72.90
+Neigh   | 0.011022   | 0.011163   | 0.011353   |   0.1 | 12.65
+Comm    | 0.010069   | 0.01126    | 0.01252    |   0.9 | 12.76
+Output  | 5.2e-05    | 5.53e-05   | 6.34e-05   |   0.0 |  0.06
+Modify  | 0.0009209  | 0.0009502  | 0.0009828  |   0.0 |  1.08
+Other   |            | 0.0004809  |            |       |  0.55
+
+Nlocal:    1000 ave 1010 max 982 min
+Histogram: 1 0 0 0 0 0 1 0 0 2
+Nghost:    2703.75 ave 2713 max 2689 min
+Histogram: 1 0 0 0 0 0 0 2 0 1
+Neighs:    37915.5 ave 39239 max 36193 min
+Histogram: 1 0 0 0 0 1 1 0 0 1
+
+Total # of neighbors = 151662
+Ave neighs/atom = 37.9155
+Neighbor list builds = 12
+Dangerous builds not checked
+Total wall time: 0:00:00
+
+real    0m0.319s
+user    0m0.000s
+sys     0m0.000s
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ echo "Testing with 6 processors:"
+Testing with 6 processors:
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ time mpiexec -n 6 lmp_mingw64_mpi -in in.melt
+LAMMPS (7 Aug 2019)
+Lattice spacing in x,y,z = 1.6796 1.6796 1.6796
+Created orthogonal box = (0 0 0) to (16.796 16.796 16.796)
+  1 by 2 by 3 MPI processor grid
+Created 4000 atoms
+  create_atoms CPU = 0.0003518 secs
+Neighbor list info ...
+  update every 20 steps, delay 0 steps, check no
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 2.8
+  ghost atom cutoff = 2.8
+  binsize = 1.4, bins = 12 12 12
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 2.682 | 2.688 | 2.699 Mbytes
+Step Temp E_pair E_mol TotEng Press
+       0            3   -6.7733681            0   -2.2744931   -3.7033504
+      50    1.6804394   -4.8020817            0   -2.2820528      5.61676
+     100    1.6357717   -4.7341005            0   -2.2810564    5.9029129
+     150    1.6578211   -4.7674265            0   -2.2813165    5.7985228
+     200    1.6588784   -4.7687979            0   -2.2811025    5.8159303
+     250    1.6719021   -4.7887749            0   -2.2815487    5.7164918
+Loop time of 0.0766692 on 6 procs for 250 steps with 4000 atoms
+
+Performance: 1408649.412 tau/day, 3260.763 timesteps/s
+74.7% CPU use with 6 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.049489   | 0.051499   | 0.054294   |   0.8 | 67.17
+Neigh   | 0.0084973  | 0.0086614  | 0.0088686  |   0.1 | 11.30
+Comm    | 0.012114   | 0.015138   | 0.017314   |   1.5 | 19.74
+Output  | 8.2e-05    | 8.8117e-05 | 9.8e-05    |   0.0 |  0.11
+Modify  | 0.0007381  | 0.00077522 | 0.0008112  |   0.0 |  1.01
+Other   |            | 0.0005076  |            |       |  0.66
+
+Nlocal:    666.667 ave 689 max 647 min
+Histogram: 1 0 1 0 1 1 1 0 0 1
+Nghost:    2283.33 ave 2303 max 2250 min
+Histogram: 1 0 0 0 0 1 1 1 1 1
+Neighs:    25251.5 ave 27018 max 23886 min
+Histogram: 1 1 0 0 2 0 1 0 0 1
+
+Total # of neighbors = 151509
+Ave neighs/atom = 37.8772
+Neighbor list builds = 12
+Dangerous builds not checked
+Total wall time: 0:00:00
+
+real    0m0.303s
+user    0m0.000s
+sys     0m0.000s
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ echo "Testing with 8 processors:"
+Testing with 8 processors:
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ time mpiexec -n 8 lmp_mingw64_mpi -in in.melt
+LAMMPS (7 Aug 2019)
+Lattice spacing in x,y,z = 1.6796 1.6796 1.6796
+Created orthogonal box = (0 0 0) to (16.796 16.796 16.796)
+  2 by 2 by 2 MPI processor grid
+Created 4000 atoms
+  create_atoms CPU = 0.0003981 secs
+Neighbor list info ...
+  update every 20 steps, delay 0 steps, check no
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 2.8
+  ghost atom cutoff = 2.8
+  binsize = 1.4, bins = 12 12 12
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 2.645 | 2.645 | 2.645 Mbytes
+Step Temp E_pair E_mol TotEng Press
+       0            3   -6.7733681            0   -2.2744931   -3.7033504
+      50    1.6651219   -4.7800507            0   -2.2829922    5.6676155
+     100     1.659692   -4.7700783            0   -2.2811627     5.749944
+     150     1.652159   -4.7594098            0   -2.2817909    5.8299095
+     200    1.6421383   -4.7441555            0   -2.2815638    5.8720606
+     250    1.6597903   -4.7697969            0   -2.2807338    5.7747105
+Loop time of 0.0796185 on 8 procs for 250 steps with 4000 atoms
+
+Performance: 1356469.511 tau/day, 3139.976 timesteps/s
+76.0% CPU use with 8 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.034061   | 0.043646   | 0.052199   |   3.4 | 54.82
+Neigh   | 0.0058921  | 0.0068729  | 0.0078627  |   0.9 |  8.63
+Comm    | 0.018028   | 0.02785    | 0.038715   |   4.9 | 34.98
+Output  | 8.64e-05   | 9.59e-05   | 0.0001118  |   0.0 |  0.12
+Modify  | 0.0005141  | 0.00074521 | 0.0010087  |   0.0 |  0.94
+Other   |            | 0.0004078  |            |       |  0.51
+
+Nlocal:    500 ave 507 max 491 min
+Histogram: 1 0 1 1 0 0 2 1 1 1
+Nghost:    1812.75 ave 1827 max 1799 min
+Histogram: 1 0 0 3 0 1 1 1 0 1
+Neighs:    18971.1 ave 19624 max 18242 min
+Histogram: 1 1 0 1 1 1 0 0 1 2
+
+Total # of neighbors = 151769
+Ave neighs/atom = 37.9423
+Neighbor list builds = 12
+Dangerous builds not checked
+Total wall time: 0:00:00
+
+real    0m0.287s
+user    0m0.000s
+sys     0m0.000s
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ echo "Testing with 10 processors:"
+Testing with 10 processors:
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ time mpiexec -n 10 lmp_mingw64_mpi -in in.melt
+LAMMPS (7 Aug 2019)
+Lattice spacing in x,y,z = 1.6796 1.6796 1.6796
+Created orthogonal box = (0 0 0) to (16.796 16.796 16.796)
+  1 by 2 by 5 MPI processor grid
+Created 4000 atoms
+  create_atoms CPU = 0.0005308 secs
+Neighbor list info ...
+  update every 20 steps, delay 0 steps, check no
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 2.8
+  ghost atom cutoff = 2.8
+  binsize = 1.4, bins = 12 12 12
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 2.661 | 2.674 | 2.677 Mbytes
+Step Temp E_pair E_mol TotEng Press
+       0            3   -6.7733681            0   -2.2744931   -3.7033504
+      50    1.6713348   -4.7888112            0   -2.2824357    5.6826206
+     100    1.6393735   -4.7394727            0   -2.2810273    5.8545501
+     150    1.6381666   -4.7380873            0   -2.2814517    5.8912403
+     200    1.6506224   -4.7572768            0   -2.2819621    5.8083294
+     250    1.6543313   -4.7625941            0   -2.2817174    5.8133244
+Loop time of 0.0708854 on 10 procs for 250 steps with 4000 atoms
+
+Performance: 1523586.817 tau/day, 3526.821 timesteps/s
+86.0% CPU use with 10 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.032833   | 0.04057    | 0.047282   |   2.8 | 57.23
+Neigh   | 0.0054592  | 0.0062747  | 0.0068927  |   0.7 |  8.85
+Comm    | 0.01502    | 0.022673   | 0.031514   |   4.2 | 31.99
+Output  | 0.0001178  | 0.00013159 | 0.0001443  |   0.0 |  0.19
+Modify  | 0.0005035  | 0.0006821  | 0.0008473  |   0.0 |  0.96
+Other   |            | 0.0005539  |            |       |  0.78
+
+Nlocal:    400 ave 413 max 386 min
+Histogram: 1 0 1 0 3 1 2 1 0 1
+Nghost:    1963.6 ave 1983 max 1939 min
+Histogram: 1 0 1 1 0 2 1 2 1 1
+Neighs:    15132.9 ave 15653 max 14351 min
+Histogram: 1 0 1 1 0 2 1 0 1 3
+
+Total # of neighbors = 151329
+Ave neighs/atom = 37.8323
+Neighbor list builds = 12
+Dangerous builds not checked
+Total wall time: 0:00:00
+
+real    0m0.301s
+user    0m0.000s
+sys     0m0.000s
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ echo "Testing with 12 processors:"
+Testing with 12 processors:
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$ time mpiexec -n 12 lmp_mingw64_mpi -in in.melt
+LAMMPS (7 Aug 2019)
+Lattice spacing in x,y,z = 1.6796 1.6796 1.6796
+Created orthogonal box = (0 0 0) to (16.796 16.796 16.796)
+  2 by 2 by 3 MPI processor grid
+Created 4000 atoms
+  create_atoms CPU = 0.0006091 secs
+Neighbor list info ...
+  update every 20 steps, delay 0 steps, check no
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 2.8
+  ghost atom cutoff = 2.8
+  binsize = 1.4, bins = 12 12 12
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+Setting up Verlet run ...
+  Unit style    : lj
+  Current step  : 0
+  Time step     : 0.005
+Per MPI rank memory allocation (min/avg/max) = 2.63 | 2.634 | 2.641 Mbytes
+Step Temp E_pair E_mol TotEng Press
+       0            3   -6.7733681            0   -2.2744931   -3.7033504
+      50    1.6746937   -4.7940546            0    -2.282642    5.5845586
+     100    1.6510577   -4.7567887            0   -2.2808214    5.8208747
+     150    1.6430747   -4.7443111            0   -2.2803153    5.8846894
+     200    1.6393075   -4.7404901            0   -2.2821436    5.9139187
+     250    1.6733412    -4.790949            0   -2.2815647    5.6864593
+Loop time of 0.0588762 on 12 procs for 250 steps with 4000 atoms
+
+Performance: 1834358.815 tau/day, 4246.201 timesteps/s
+42.0% CPU use with 12 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.029542   | 0.032712   | 0.035411   |   1.0 | 55.56
+Neigh   | 0.0046663  | 0.0050067  | 0.0052905  |   0.3 |  8.50
+Comm    | 0.016799   | 0.019991   | 0.02367    |   1.5 | 33.95
+Output  | 0.0001136  | 0.00012838 | 0.0001456  |   0.0 |  0.22
+Modify  | 0.0005459  | 0.00060759 | 0.0007098  |   0.0 |  1.03
+Other   |            | 0.0004299  |            |       |  0.73
+
+Nlocal:    333.333 ave 346 max 324 min
+Histogram: 2 1 2 1 2 2 0 0 0 2
+Nghost:    1518 ave 1539 max 1501 min
+Histogram: 2 0 1 2 3 1 1 1 0 1
+Neighs:    12623.3 ave 13694 max 12118 min
+Histogram: 2 1 5 1 1 0 1 0 0 1
+
+Total # of neighbors = 151480
+Ave neighs/atom = 37.87
+Neighbor list builds = 12
+Dangerous builds not checked
+Total wall time: 0:00:00
+
+real    0m0.318s
+user    0m0.000s
+sys     0m0.000s
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/examples/melt
+$

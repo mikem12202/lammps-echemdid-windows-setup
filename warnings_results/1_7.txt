@@ -1,0 +1,35 @@
+PS C:\Users\ADAML> mpiexec -n 2 hostname
+ADAMLabFive
+ADAMLabFive
+
+
+PS C:\Users\ADAML> dir "C:\Program Files (x86)\Microsoft SDKs\MPI\Include\mpi.h"
+
+
+    Directory: C:\Program Files (x86)\Microsoft SDKs\MPI\Include
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         9/17/2019   5:05 PM         175354 mpi.h
+
+
+PS C:\Users\ADAML> dir "C:\Program Files\Microsoft SDKs\MPI\Include\mpi.h"
+dir : Cannot find path 'C:\Program Files\Microsoft SDKs\MPI\Include\mpi.h' because it does not exist.
+At line:1 char:1
++ dir "C:\Program Files\Microsoft SDKs\MPI\Include\mpi.h"
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Program File...I\Include\mpi.h:String) [Get-ChildItem], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetChildItemCommand
+
+PS C:\Users\ADAML> dir "C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x64\*.lib"
+
+
+    Directory: C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x64
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         9/17/2019   5:10 PM         321236 msmpi.lib
+-a----         9/17/2019   5:09 PM        1174888 msmpifec.lib
+-a----         9/17/2019   5:09 PM        1191436 msmpifmc.lib

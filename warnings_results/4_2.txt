@@ -1,0 +1,84 @@
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ cd /c/Users/$USER/Documents
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents
+$ cp -r LAMMPS-hacks-public/ECHEMDID-22Aug18 lammps-7Aug19/src/USER-ECHEMDID
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents
+$ cd lammps-7Aug19/src
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ ls -la | grep USER
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-ADIOS
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-ATC
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-AWPMD
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-BOCS
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-CGDNA
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-CGSDK
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-COLVARS
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-DIFFRACTION
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-DPD
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-DRUDE
+drwxr-xr-x 1 ADAML ADAML      0 Oct 24 11:06 USER-ECHEMDID
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-EFF
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-FEP
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-H5MD
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-INTEL
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-LB
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-MANIFOLD
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-MEAMC
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-MESO
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-MGPT
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-MISC
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-MOFFF
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-MOLFILE
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-NETCDF
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-OMP
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-PHONON
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-PLUMED
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-PTM
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-QMMM
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-QTB
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-QUIP
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-REAXC
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-SCAFACOS
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-SDPD
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-SMD
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-SMTBQ
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-SPH
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-TALLY
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-UEF
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-VTK
+drwxr-xr-x 1 ADAML ADAML      0 Aug  6  2019 USER-YAFF
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src
+$ cd USER-ECHEMDID
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src/USER-ECHEMDID
+$ ls -la
+total 377
+drwxr-xr-x 1 ADAML ADAML     0 Oct 24 11:06 .
+drwxr-xr-x 1 ADAML ADAML     0 Oct 24 11:06 ..
+-rw-r--r-- 1 ADAML ADAML   308 Oct 24 11:06 README.md
+-rw-r--r-- 1 ADAML ADAML  8338 Oct 24 11:06 fix_echemdid.cpp
+-rw-r--r-- 1 ADAML ADAML  1600 Oct 24 11:06 fix_echemdid.h
+-rw-r--r-- 1 ADAML ADAML 19198 Oct 24 11:06 fix_qeq.cpp
+-rw-r--r-- 1 ADAML ADAML  3995 Oct 24 11:06 fix_qeq.h
+-rw-r--r-- 1 ADAML ADAML  6812 Oct 24 11:06 fix_qeq_shielded.cpp
+-rw-r--r-- 1 ADAML ADAML  1838 Oct 24 11:06 fix_qeq_shielded.h
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src/USER-ECHEMDID
+$ ls -la *.cpp *.h
+-rw-r--r-- 1 ADAML ADAML  8338 Oct 24 11:06 fix_echemdid.cpp
+-rw-r--r-- 1 ADAML ADAML  1600 Oct 24 11:06 fix_echemdid.h
+-rw-r--r-- 1 ADAML ADAML 19198 Oct 24 11:06 fix_qeq.cpp
+-rw-r--r-- 1 ADAML ADAML  3995 Oct 24 11:06 fix_qeq.h
+-rw-r--r-- 1 ADAML ADAML  6812 Oct 24 11:06 fix_qeq_shielded.cpp
+-rw-r--r-- 1 ADAML ADAML  1838 Oct 24 11:06 fix_qeq_shielded.h
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src/USER-ECHEMDID
+$ ls -la Install.sh
+ls: cannot access 'Install.sh': No such file or directory
+
+ADAML@ADAMLabFive MINGW64 /c/Users/ADAML/Documents/lammps-7Aug19/src/USER-ECHEMDID
+$
