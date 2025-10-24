@@ -3,18 +3,26 @@
 **Target Configuration:**
 - LAMMPS Version: 7 Aug 2019
 - EChemDID Version: 22 Aug 2018 (from LAMMPS-hacks-public repo)
-- Parallel Execution: MPI enabled (lmp_mpi)
+- Parallel Execution: MPI enabled (lmp_mingw64_mpi)
 - Operating System: Windows 11
-- Build System: MSYS2 MinGW64
+- Build System: MSYS2 MinGW64 (NOT Git Bash)
+- Compiler: GCC 15.2.0 (MinGW-w64)
+- MPI: MS-MPI 10.1.1
 
 **Date Started:** October 24, 2025
 
+**Critical Notes:**
+- ⚠️ **MUST use MSYS2 MinGW64 terminal exclusively** - Git Bash will cause compilation issues
+- ⚠️ **Windows requires special memory allocation fixes** - See Phase 5.7 for details
+- ⚠️ Use pure 7Aug2019 tarball, not git clone (prevents version mixing)
+- ⚠️ Executable name is `lmp_mingw64_mpi.exe`, not `lmp_mpi`
+
 **Lessons from Previous Attempt:**
 - ⚠️ Avoid mixing source code from different LAMMPS versions (caused compilation conflicts)
-- ⚠️ Do NOT manually edit core LAMMPS source files (my_pool_chunk.h, memory.cpp, etc.)
+- ⚠️ Windows lacks POSIX `posix_memalign` - requires `_aligned_malloc` wrapper
+- ⚠️ Memory allocated with `_aligned_malloc` MUST be freed with `_aligned_free`
 - ⚠️ USER-QEQ is built-in to 2019 LAMMPS, not a separate USER package
-- ⚠️ Use pure 7Aug2019 tarball, not git clone with checkout (prevents version mixing)
-- ⚠️ MSYS2 MinGW64 environment is required for Windows builds
+- ⚠️ KISS FFT is simpler than FFTW3 for Windows builds
 - ⚠️ Avoid Windows Git bash tools in PATH during compilation
 
 ---
@@ -858,7 +866,7 @@ FFT_LIB =	-lfftw3
 
 **Save the file (Ctrl+O, Enter, Ctrl+X in nano)**
 
-### 5.6 Build lmp_mpi
+### 5.6 Build lmp_mingw64_mpi
 
 ```bash
 cd /c/Users/$USER/Documents/lammps-7Aug19/src
@@ -871,29 +879,254 @@ make mingw64_mpi -j4
 
 # The -j4 uses 4 cores for parallel compilation (adjust based on your CPU)
 # This will take several minutes
-
-# Watch for errors during compilation
 ```
 
-**⚠️ If build fails with memory allocation errors:**
-- This is expected on Windows MinGW64
-- We'll address specific errors as they appear
-- Do NOT manually edit core LAMMPS files yet
+**⚠️ EXPECTED: Build will fail with `posix_memalign` errors on Windows**
+- This is NORMAL - Windows lacks POSIX memory alignment functions
+- Proceed to Phase 5.7 to apply Windows compatibility fixes
 
-### 5.7 Monitor Build Progress
+### 5.7 Apply Windows Compatibility Fixes
+
+**Critical:** Windows MinGW64 does not provide `posix_memalign`. We must use `_aligned_malloc` and `_aligned_free` instead.
+
+#### 5.7.1 Fix my_pool_chunk.h
 
 ```bash
-# While building, you'll see compilation of many .cpp files
-# Watch for error messages
-
-# Common patterns you might see:
-# - Compiling: [filename].cpp
-# - Linking: creating lmp_mingw64_mpi
-
-# If successful, the executable will be created
+cd /c/Users/$USER/Documents/lammps-7Aug19/src
+nano my_pool_chunk.h
 ```
 
-### 5.8 Verify Build (if successful)
+**Find the `allocate()` function (around line 196-213)** and replace the `posix_memalign` section with:
+
+```cpp
+#if defined(LAMMPS_MEMALIGN)
+      void *ptr;
+#if defined(_WIN32) || defined(_WIN64)
+      // Windows: use _aligned_malloc instead of posix_memalign
+      ptr = _aligned_malloc(chunkperpage * chunksize[ibin] * sizeof(T), LAMMPS_MEMALIGN);
+      if (!ptr) errorflag = 2;
+      pages[i] = (T*)ptr;
+#else
+      // POSIX systems: use posix_memalign
+      int retval = posix_memalign(&ptr, LAMMPS_MEMALIGN,
+          chunkperpage * chunksize[ibin] * sizeof(T));
+      if (retval) errorflag = 2;
+      pages[i] = (T*)ptr;
+#endif
+#else
+      pages[i] = (T *) malloc(chunkperpage*chunksize[ibin]*sizeof(T));
+      size += chunkperpage*chunksize[ibin];
+      if (!pages[i]) errorflag = 2;
+#endif
+```
+
+**Find the destructor `~MyPoolChunk()` (around line 102-112)** and update the free loop:
+
+```cpp
+~MyPoolChunk() {
+  delete [] freehead;
+  delete [] chunksize;
+  if (npage) {
+    free(freelist);
+    for (int i = 0; i < npage; i++) {
+#if defined(LAMMPS_MEMALIGN) && (defined(_WIN32) || defined(_WIN64))
+      _aligned_free(pages[i]);
+#else
+      free(pages[i]);
+#endif
+    }
+    free(pages);
+    free(whichbin);
+  }
+}
+```
+
+Save and exit (Ctrl+O, Enter, Ctrl+X).
+
+#### 5.7.2 Fix my_page.h
+
+```bash
+nano my_page.h
+```
+
+**Find the `allocate()` function (around line 221-235)** and replace with:
+
+```cpp
+void allocate() {
+  npage += pagedelta;
+  // Management array doesn't need alignment - use regular realloc
+  pages = (T **) realloc(pages,npage*sizeof(T *));
+  if (!pages) {
+    errorflag = 2;
+    return;
+  }
+
+  for (int i = npage-pagedelta; i < npage; i++) {
+#if defined(LAMMPS_MEMALIGN)
+    void *ptr;
+#if defined(_WIN32) || defined(_WIN64)
+    // Windows: use _aligned_malloc instead of posix_memalign
+    ptr = _aligned_malloc(pagesize*sizeof(T), LAMMPS_MEMALIGN);
+    if (!ptr) errorflag = 2;
+    pages[i] = (T *) ptr;
+#else
+    // POSIX systems: use posix_memalign
+    if (posix_memalign(&ptr, LAMMPS_MEMALIGN, pagesize*sizeof(T)))
+      errorflag = 2;
+    pages[i] = (T *) ptr;
+#endif
+#else
+    pages[i] = (T *) malloc(pagesize*sizeof(T));
+    if (!pages[i]) errorflag = 2;
+#endif
+  }
+}
+```
+
+**Find the destructor `~MyPage()` (around line 90)** and update:
+
+```cpp
+~MyPage() {
+  for (int i = 0; i < npage; i++) {
+#if defined(LAMMPS_MEMALIGN) && (defined(_WIN32) || defined(_WIN64))
+    _aligned_free(pages[i]);
+#else
+    free(pages[i]);
+#endif
+  }
+  free(pages);
+}
+```
+
+**Find the `init()` function's free section (around line 84)** and update:
+
+```cpp
+// free any previously allocated pages
+for (int i = 0; i < npage; i++) {
+#if defined(LAMMPS_MEMALIGN) && (defined(_WIN32) || defined(_WIN64))
+  _aligned_free(pages[i]);
+#else
+  free(pages[i]);
+#endif
+}
+free(pages);
+```
+
+Save and exit.
+
+#### 5.7.3 Fix memory.cpp
+
+```bash
+nano memory.cpp
+```
+
+**Find the `smalloc()` function (around line 42-64)** and update:
+
+```cpp
+void *Memory::smalloc(bigint nbytes, const char *name)
+{
+  if (nbytes == 0) return NULL;
+
+#if defined(LAMMPS_MEMALIGN)
+  void *ptr;
+
+#if defined(LMP_USE_TBB_ALLOCATOR)
+  ptr = scalable_aligned_malloc(nbytes, LAMMPS_MEMALIGN);
+#elif defined(_WIN32) || defined(_WIN64)
+  // Windows: use _aligned_malloc instead of posix_memalign
+  ptr = _aligned_malloc(nbytes, LAMMPS_MEMALIGN);
+#else
+  // POSIX systems: use posix_memalign
+  int retval = posix_memalign(&ptr, LAMMPS_MEMALIGN, nbytes);
+  if (retval) ptr = NULL;
+#endif
+
+#else
+  void *ptr = malloc(nbytes);
+#endif
+  if (ptr == NULL) {
+    char str[128];
+    sprintf(str,"Failed to allocate " BIGINT_FORMAT " bytes for array %s",
+            nbytes,name);
+    error->one(FLERR,str);
+  }
+  return ptr;
+}
+```
+
+**Find the `srealloc()` function (around line 75-105)** and update:
+
+```cpp
+void *Memory::srealloc(void *ptr, bigint nbytes, const char *name)
+{
+  if (nbytes == 0) {
+    destroy(ptr);
+    return NULL;
+  }
+
+#if defined(LMP_USE_TBB_ALLOCATOR)
+  ptr = scalable_aligned_realloc(ptr, nbytes, LAMMPS_MEMALIGN);
+#elif defined(LMP_INTEL_NO_TBB) && defined(LAMMPS_MEMALIGN) && \
+      defined(__INTEL_COMPILER)
+
+  ptr = realloc(ptr, nbytes);
+  uintptr_t offset = ((uintptr_t)(const void *)(ptr)) % LAMMPS_MEMALIGN;
+  if (offset) {
+    void *optr = ptr;
+    ptr = smalloc(nbytes, name);
+    memcpy(ptr, optr, MIN(nbytes,malloc_usable_size(optr)));
+    free(optr);
+  }
+#elif defined(LAMMPS_MEMALIGN) && (defined(_WIN32) || defined(_WIN64))
+  // Windows: use _aligned_realloc for memory allocated with _aligned_malloc
+  ptr = _aligned_realloc(ptr, nbytes, LAMMPS_MEMALIGN);
+#else
+  ptr = realloc(ptr,nbytes);
+#endif
+  if (ptr == NULL) {
+    char str[128];
+    sprintf(str,"Failed to reallocate " BIGINT_FORMAT " bytes for array %s",
+            nbytes,name);
+    error->one(FLERR,str);
+  }
+  return ptr;
+}
+```
+
+**Find the `sfree()` function (around line 110-120)** and update:
+
+```cpp
+void Memory::sfree(void *ptr)
+{
+  if (ptr == NULL) return;
+#if defined(LMP_USE_TBB_ALLOCATOR)
+  scalable_aligned_free(ptr);
+#elif defined(LAMMPS_MEMALIGN) && (defined(_WIN32) || defined(_WIN64))
+  // Windows: use _aligned_free for memory allocated with _aligned_malloc
+  _aligned_free(ptr);
+#else
+  free(ptr);
+#endif
+}
+```
+
+Save and exit.
+
+### 5.8 Rebuild with Windows Fixes
+
+```bash
+cd /c/Users/$USER/Documents/lammps-7Aug19/src
+
+# Clean completely
+make clean-all
+
+# Rebuild
+make mingw64_mpi -j4
+```
+
+**Expected output:** Build should now complete successfully and create `lmp_mingw64_mpi.exe`
+
+### 5.9 Verify Build
 
 ```bash
 cd /c/Users/$USER/Documents/lammps-7Aug19/src
@@ -1013,17 +1246,7 @@ nano my_page.h
 ```bash
 make clean-all
 make mingw64_mpi -j4
-```
-
-### Issue 2: Other Windows-specific compilation errors
-
-**Document any errors and address them minimally:**
-- Keep notes of what errors occur
-- Make smallest possible fixes
-- Always backup files before editing
-- Try to use conditional compilation (#ifdef _WIN32) rather than removing code
-
----
+```---
 
 ## Phase 6: Installation and Setup
 
@@ -1033,13 +1256,13 @@ make mingw64_mpi -j4
 cd /c/Users/$USER/Documents/lammps-7Aug19/src
 
 # Check if executable exists
-ls -lh lmp_mingw64_mpi
+ls -lh lmp_mingw64_mpi.exe
 
-# File should be several MB in size
-file lmp_mingw64_mpi  # Should show: PE32+ executable
+# File should be several MB in size (typically 15-25 MB)
+file lmp_mingw64_mpi.exe  # Should show: PE32+ executable
 
 # Test basic execution
-./lmp_mingw64_mpi -h
+./lmp_mingw64_mpi.exe -h
 
 # Should display LAMMPS help and version info
 ```
@@ -1048,63 +1271,43 @@ file lmp_mingw64_mpi  # Should show: PE32+ executable
 
 ```bash
 # Test with 2 processes
-mpiexec -n 2 ./lmp_mingw64_mpi -h
+mpiexec -n 2 ./lmp_mingw64_mpi.exe -h
 
 # Test with 4 processes  
-mpiexec -n 4 ./lmp_mingw64_mpi -h
+mpiexec -n 4 ./lmp_mingw64_mpi.exe -h
 
-# Both should succeed without errors
+# Both should succeed without errors and show LAMMPS help
 ```
 
-### 6.3 Create Easy Access to Executable
+### 6.3 Add Executable to PATH (Recommended)
 
-**Option 1: Add to Windows PATH**
+**Option 1: Add to Windows PATH (Permanent)**
 ```cmd
 # In Windows Command Prompt (as Administrator)
 setx PATH "%PATH%;%USERPROFILE%\Documents\lammps-7Aug19\src" /M
 
-# Or for current user only:
-setx PATH "%PATH%;%USERPROFILE%\Documents\lammps-7Aug19\src"
+# Restart MSYS2 MinGW64 terminal after this
 ```
 
-**Option 2: Create alias in MSYS2**
+**Option 2: Add to MSYS2 PATH (MSYS2 only)**
 ```bash
 # In MSYS2 MinGW64
 nano ~/.bashrc
 
-# Add this line:
-alias lmp_mpi='/c/Users/$USER/Documents/lammps-7Aug19/src/lmp_mingw64_mpi'
+# Add these lines at the end:
+export LAMMPS_HOME="/c/Users/$USER/Documents/lammps-7Aug19"
+export PATH="$PATH:$LAMMPS_HOME/src"
 
 # Save and reload
 source ~/.bashrc
 
 # Test
-lmp_mpi -h
+lmp_mingw64_mpi.exe -h
 ```
 
-**Option 3: Copy to MSYS2 bin directory**
-```bash
-# Copy executable
-cp /c/Users/$USER/Documents/lammps-7Aug19/src/lmp_mingw64_mpi ~/bin/lmp_mpi
+**Note:** We use `lmp_mingw64_mpi.exe` directly (no alias needed)
 
-# Make executable
-chmod +x ~/bin/lmp_mpi
-
-# Test
-lmp_mpi -h
-```
-
-### 6.4 Set Up Environment Variables (Optional)
-
-```bash
-# In MSYS2 MinGW64
-nano ~/.bashrc
-
-# Add these lines:
-export LAMMPS_HOME="/c/Users/$USER/Documents/lammps-7Aug19"
-export PATH="$PATH:$LAMMPS_HOME/src"
-
-# Save and reload
+### 6.4 Verify Installation
 source ~/.bashrc
 
 # Verify
@@ -1120,15 +1323,25 @@ which lmp_mpi
 which lmp_mingw64_mpi
 
 # Test execution
-lmp_mpi -h
+lmp_mingw64_mpi.exe -h
 
 # Test MPI with different processor counts
-mpiexec -n 1 lmp_mpi -h
-mpiexec -n 2 lmp_mpi -h
-mpiexec -n 4 lmp_mpi -h
+mpiexec -n 1 lmp_mingw64_mpi.exe -h
+### 6.4 Verify Installation
+
+```bash
+# Check executable location
+which lmp_mingw64_mpi.exe
+
+# Test basic help
+lmp_mingw64_mpi.exe -h
+
+# Test MPI execution
+mpiexec -n 2 lmp_mingw64_mpi.exe -h
+mpiexec -n 4 lmp_mingw64_mpi.exe -h
 
 # Check version info
-lmp_mpi -h | head -n 10
+lmp_mingw64_mpi.exe -h | head -n 10
 # Should show: LAMMPS (7 Aug 2019)
 ```
 
@@ -1152,7 +1365,7 @@ ls -la
 # - etc.
 ```
 
-### 7.2 Run Basic LAMMPS Example (Serial)
+### 7.2 Run Basic LAMMPS Example (Serial - Single Process)
 
 ```bash
 # Test with a simple melt example first
@@ -1161,60 +1374,74 @@ cd /c/Users/$USER/Documents/lammps-7Aug19/examples/melt
 # List files
 ls -la
 
-# Run in serial mode first (to isolate MPI issues)
-/c/Users/$USER/Documents/lammps-7Aug19/src/lmp_mingw64_mpi -in in.melt
-
-# Or if you set up alias:
-lmp_mpi -in in.melt
+# Run in single process mode first
+lmp_mingw64_mpi.exe -in in.melt
 
 # Watch for output - should show:
 # - Initialization
 # - Timestep progress
-# - "Total wall time: X seconds"
+# - Performance statistics
+# - "Loop time of X on 1 procs"
 # - NO errors
 ```
 
 **Expected output:**
 ```
 LAMMPS (7 Aug 2019)
+Lattice spacing in x,y,z = 1.6796 1.6796 1.6796
+Created orthogonal box = (0 0 0) to (16.796 16.796 16.796)
+  1 by 1 by 1 MPI processor grid
+Created 4000 atoms
 ...
-Setting up run ...
+Setting up Verlet run ...
 ...
-Loop time of X on Y procs for Z steps with W atoms
+Step Temp E_pair E_mol TotEng Press
+   0    3   -6.7733681    0   -2.2744931   -3.7033504
+  50    1.6758903   -4.7955425    0   -2.2823355     5.670064
 ...
+Loop time of 0.322 on 1 procs for 250 steps with 4000 atoms
 ```
 
-### 7.3 Run LAMMPS Example with MPI
+### 7.3 Run LAMMPS Example with MPI (Parallel)
 
 ```bash
 # Still in examples/melt directory
 cd /c/Users/$USER/Documents/lammps-7Aug19/examples/melt
 
 # Run with 2 processes
-mpiexec -n 2 lmp_mpi -in in.melt
+mpiexec -n 2 lmp_mingw64_mpi.exe -in in.melt
 
 # Run with 4 processes
-mpiexec -n 4 lmp_mpi -in in.melt
+mpiexec -n 4 lmp_mingw64_mpi.exe -in in.melt
 
 # Check exit status
 echo $?  # Should return 0 for success
 
 # Verify log file was created
 ls -la log.lammps
-cat log.lammps  # Check for errors
+cat log.lammps  # Should show successful completion
 ```
 
-**⚠️ From Previous Attempt:** Executables weren't working properly
-- **Possible causes:** Mixed source versions, manual edits, wrong build environment
-- **This time:** Clean build should produce working executable
-- **If still failing:** Document exact error messages
+**Expected output for MPI run:**
+```
+LAMMPS (7 Aug 2019)
+...
+  2 by 1 by 1 MPI processor grid  # (for -n 2)
+...
+Loop time of X on 2 procs for 250 steps with 4000 atoms
+```
+
+**Success indicators:**
+- No "job aborted" or "crashed" messages
+- No heap corruption errors (0xc0000374)
+- Creates output files (log.lammps, dump.melt if specified)
+- Exit code is 0
 
 ### 7.4 Test EChemDID Functionality
 
-**First, check if there are EChemDID examples:**
+**First, check if fix echemdid is available:**
 ```bash
-cd /c/Users/$USER/Documents/LAMMPS-hacks-public
-ls -la
+lmp_mingw64_mpi.exe -h | grep -i echemdid
 
 # Look for example inputs or test cases
 find . -name "*.in" -o -name "*.lmp"
@@ -1227,15 +1454,15 @@ find . -name "*example*" -type d
 cd [path-to-echemdid-examples]
 
 # Run test case
-mpiexec -n 4 lmp_mpi -in [input-file.in]
+mpiexec -n 4 lmp_mingw64_mpi.exe -in [input-file.in]
 ```
 
 **If no examples, create simple test:**
 ```bash
 # Test that ECHEMDID fixes are available
-lmp_mpi -h | grep -i echemdid
+lmp_mingw64_mpi.exe -h | grep -i echemdid
 # or
-lmp_mpi -h > lammps_help.txt
+lmp_mingw64_mpi.exe -h > lammps_help.txt
 grep -i echemdid lammps_help.txt
 grep -i "fix.*echem" lammps_help.txt
 ```
@@ -1247,13 +1474,13 @@ cd /c/Users/$USER/Documents/lammps-7Aug19/examples/melt
 
 # Test scaling with different processor counts
 echo "Testing with 1 processor:"
-time mpiexec -n 1 lmp_mpi -in in.melt
+time mpiexec -n 1 lmp_mingw64_mpi.exe -in in.melt
 
 echo "Testing with 2 processors:"
-time mpiexec -n 2 lmp_mpi -in in.melt
+time mpiexec -n 2 lmp_mingw64_mpi.exe -in in.melt
 
 echo "Testing with 4 processors:"
-time mpiexec -n 4 lmp_mpi -in in.melt
+time mpiexec -n 4 lmp_mingw64_mpi.exe -in in.melt
 
 # Compare "Total wall time" in the output
 # Should see speedup with more processors
@@ -1704,16 +1931,16 @@ Starting MSYS2 MinGW64:
 Running LAMMPS:
 ---------------
 # Serial (single processor)
-lmp_mpi -in input.in
+lmp_mingw64_mpi.exe -in input.in
 
 # Parallel (4 processors)
-mpiexec -n 4 lmp_mpi -in input.in
+mpiexec -n 4 lmp_mingw64_mpi.exe -in input.in
 
 # With log file
-mpiexec -n 4 lmp_mpi -in input.in -log my_log.lammps
+mpiexec -n 4 lmp_mingw64_mpi.exe -in input.in -log my_log.lammps
 
 # With screen output
-mpiexec -n 4 lmp_mpi -in input.in -screen output.txt
+mpiexec -n 4 lmp_mingw64_mpi.exe -in input.in -screen output.txt
 
 Common File Locations:
 ---------------------
@@ -1739,7 +1966,7 @@ Troubleshooting:
 mpiexec -n 2 hostname
 
 # Test LAMMPS
-lmp_mpi -h
+lmp_mingw64_mpi.exe -h
 
 # Check for errors
 grep -i error log.lammps
@@ -1759,25 +1986,25 @@ Windows Start Menu → "MSYS2 MinGW64" (blue icon, NOT the purple MSYS icon)
 ### Basic LAMMPS Execution
 ```bash
 # Serial execution
-lmp_mpi -in input_file.in
+lmp_mingw64_mpi.exe -in input_file.in
 
 # Parallel (4 processors)
-mpiexec -n 4 lmp_mpi -in input_file.in
+mpiexec -n 4 lmp_mingw64_mpi.exe -in input_file.in
 
 # Parallel with log redirection
-mpiexec -n 4 lmp_mpi -in input_file.in -log my_simulation.log
+mpiexec -n 4 lmp_mingw64_mpi.exe -in input_file.in -log my_simulation.log
 
 # Parallel with both log and screen output
-mpiexec -n 4 lmp_mpi -in input_file.in -log file.log -screen screen.txt
+mpiexec -n 4 lmp_mingw64_mpi.exe -in input_file.in -log file.log -screen screen.txt
 ```
 
 ### Check LAMMPS Version and Installed Features
 ```bash
 # Version info
-lmp_mpi -h | head -n 10
+lmp_mingw64_mpi.exe -h | head -n 10
 
 # List all available commands/fixes/computes
-lmp_mpi -h > lammps_features.txt
+lmp_mingw64_mpi.exe -h > lammps_features.txt
 grep "fix.*echem" lammps_features.txt
 ```
 
